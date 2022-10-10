@@ -1,0 +1,40 @@
+class_type:
+  default: 5
+  help: "3 class approach (Healthy , OR damage, IR damage) (type 1 : artificial damage),
+         3 class approach (Healthy , OR damage, IR damage) (type 2 : real damage),
+         5 class approach (type1 & type2)(type 3 : real & artificial damage),
+         11 class approach (type1 & type2 & damage_extent) (type 4 : real & artificial & damage_extent)"
+bearing_name_test:
+  default: ["K005", "KI14", "KI16", "KA15", "KA06", "KB27"]
+  help: "Name of bearing for the testing. it should be nested array to match the number of classes"
+enable_testing:
+  default: False
+  help:
+num_measurement_test:
+  default: 1
+  help: "number of measurements"
+signal_type:
+  default: "raw_vibration"
+  help:
+filter:
+  default: "none"
+  help:
+segement_size:
+  default: 2000
+  help: "length of a segment"
+norm_type_input:
+  default: "minmax"
+  help: "Input normalization type. Can be 'std' or 'minmax'"
+hparam_path:
+  default: "/home/ali/Desktop/s20_projects/MDT_project_2020/runs/f_dnn_type_5/CE_loss_run/2020-09-23_16-51-58/Hparams.yaml"
+best_model_path:
+  default: "/home/ali/Desktop/s20_projects/MDT_project_2020/runs/f_dnn_type_5/CE_loss_run/2020-09-23_16-51-58/best_model_1_validation_accuracy=0.8658.pt"
+  help:
+plot_acc:
+  default: False
+plot_path:
+  default: "t1_dnn_topology"
+labels:
+  default: ["ae_net", "ff_net", "res_net", "sae_net"]
+fig_path:
+  default: ""

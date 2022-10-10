@@ -1,0 +1,125 @@
+# run with python -m ml.train_nn_classification
+experiment_name:
+  default: 'f_dnn_type_5'
+  help: 'experiment name'
+run_name:
+  default: 'CE_loss_run'
+  help: 'run name'
+log_dir:
+  default: ""
+  help: "Use a custom root log directory where experiments and runs are then saved on path
+  root_dir/exp_name/DATE_TIME_run_name. If string is empty, root_dir is set to PROJECT_ROOT/runs"
+device:
+  default: "cuda"
+  help:
+gpu_id:
+  default: "0"
+  help:
+class_type:
+  default: 1
+  help: "3 class approach (Healthy , OR damage, IR damage) (type 1 : artificial damage),
+         3 class approach (Healthy , OR damage, IR damage) (type 2 : real damage),
+         5 class approach (type1 & type2)(type 3 : real & artificial damage),
+         11 class approach (type1 & type2 & damage_extent) (type 4 : real & artificial & damage_extent)"
+signal_type:
+  default: "raw_vibration"
+  help:
+filter:
+  default: "none"
+  help:
+bearing_name_train:
+  default: ["K002", "K004", "K006", "KA01", "KA05", "KA07", "KI01", "KI05", "KI07"]
+#  default: [ "K001", "K002" , "K003", "K004",
+#             "KI04", "KI14", "KI16","KI18",
+#             "KA04", "KA15", "KA16","KA22" ]
+  default: ["K001", "K002", "KA04", "KA01", "KA16", "KA06", "KI04", "KI03", "KI18", "KI08", "KB23", "KB24"]
+  help: "Name of bearing for the training. it should be nested array to match the number of classes"
+num_measurement_train:
+  default: 2
+  help: "number of measurements"
+enable_testing:
+  default: True
+  help:
+bearing_name_test:
+  default: ["K001", "K003", "KA04", "KA15", "KI21", "KI17"]
+#  default: ["K005", "KI14", "KI16", "KA15", "KA06", "KB27"]
+  help: "Name of bearing for the testing. it should be nested array to match the number of classes"
+num_measurement_test:
+  default: 1
+  help: "number of measurements"
+segement_size:
+  default: 2000
+  help: "length of a segment"
+norm_type_input:
+  default: "minmax"
+  help: "Input normalization type. Can be 'std' or 'minmax'"
+norm_type_target:
+  default: "std"
+  help: "Output normalization type. Can be 'std' or 'minmax'"
+seed:
+  default: 23423
+  help: "Seed applied to all random generators"
+num_epochs:
+  default: 40
+  help: "Number of epochs"
+max_training_time:
+  default: 0
+  help: "Maximum training time in hours. Disabled by default (default=0)"
+batch_size:
+  default: 64
+  help: "Size of the training batch"
+train_dev_test_split:
+  default: [0.7, 0.3, 0.0]
+  help: ""
+lr:
+  default: 1e-4
+  help: "Learning rate"
+weight_decay:
+  default: 1e-5
+  help: "Learning rate decay"
+net_size:
+  default: [1024,1024,1024,1024,1024,6]
+  help: "Net size without input size"
+batch_norm:
+  default: [True, True, True, True, True, False]
+  help: "Adds batch normalization layer after each layer. Size of batch_norm should match the number of hidden layers.
+  Disabled by default."
+eps:
+  default: 1e-5
+  help: "A value added to the denominator for numerical stability. Used when batch normalization is applied."
+momentum:
+  default: 0.1
+  help: "The value used for the running_mean and running_var computation. Can be set to ``None`` for cumulative
+  moving average (i.e. simple average). Used when batch normalization is applied."
+skip_connections:
+  default: [False, True, True, True, False, True]
+  help: "Adds skip connections between layers. Number of neurons between layers where skip connections shall be
+  added must match."
+activations:
+  default: ["relu", "relu", "relu", "relu", "relu","softmax"]
+  help: "Activation functions of hidden layers and output layer. Can be any function from torch.*. Use null/None if
+  no activation function shall be used."
+layer_types:
+  default: ["linear","linear","linear", "linear", "linear", "linear"]
+  help: "Layer type. Can be 'linear' or 'bilinear'."
+dropout:
+  default: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+  help: Probability of the an element to be zeroed in each layer.
+weight_init:
+  default: ["normal_",{"std": 0.5}]
+  help: "Weight initialization provided as list where list[0] is the name of an initialization
+  function from torch.nn.init.* and list[1] is a dict that provides keyword arguments to this function. For usage
+  without kwargs, see help of parameter 'bias_init'"
+bias_init:
+  default: "normal_"
+  help: "Actor bias initialization. Same parameter definition as 'actor_weight_init' but here only the name of the
+  function is provided without kwargs as default kwargs values are used"
+optim:
+  default: "Adam"
+  help: "Name of the optimizer. Can be any name that matches an optimizer from torch.optim*"
+loss:
+  default: "CrossEntropyLoss"
+  help: "Name of the metric to calculate the loss. Can be any valid metric name from torch.nn*"
+log_tensorboard:
+  default: True
+  help:
